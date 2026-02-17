@@ -1,131 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SwiftCart</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<title>SwiftCart</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body class="bg-gray-100">
 
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-indigo-600">SwiftCart</h1>
-      <ul class="flex gap-6 text-gray-600 font-medium">
-        <li class="hover:text-indigo-600 cursor-pointer">Home</li>
-        <li class="text-indigo-600 cursor-pointer">Products</li>
-        <li class="hover:text-indigo-600 cursor-pointer">About</li>
-        <li class="hover:text-indigo-600 cursor-pointer">Contact</li>
-      </ul>
+<!-- ================= NAVBAR ================= -->
+<nav class="bg-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-indigo-600">SwiftCart</h1>
+
+    <ul class="hidden md:flex gap-6 text-gray-600 font-medium">
+      <li onclick="showHome(this)" class="nav-link text-indigo-600 cursor-pointer hover:text-indigo-600">
+          Home
+      </li>
+
+      <li onclick="showProducts(this)" class="nav-link cursor-pointer hover:text-indigo-600">
+          Products
+      </li>
+
+      <li class="cursor-pointer hover:text-indigo-600">About</li>
+      <li class="cursor-pointer hover:text-indigo-600">Contact</li>
+    </ul>
+
+    <div class="relative cursor-pointer hover:scale-110 transition" onclick="openCart()">
+      <i class="fa-solid fa-cart-shopping text-xl"></i>
+      <span id="cartCount"
+        class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">0</span>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- Products Section -->
-  <section class="max-w-7xl mx-auto px-6 py-10">
-    <h2 class="text-3xl font-bold text-center mb-6">Our Products</h2>
 
-    <!-- Filter Buttons -->
-    <div class="flex justify-center gap-4 mb-8 flex-wrap">
-      <button onclick="filterProducts('all')" class="filter-btn bg-indigo-600 text-white px-4 py-2 rounded-full">All</button>
-      <button onclick="filterProducts('electronics')" class="filter-btn bg-white border px-4 py-2 rounded-full">Electronics</button>
-      <button onclick="filterProducts('jewelry')" class="filter-btn bg-white border px-4 py-2 rounded-full">Jewelry</button>
-      <button onclick="filterProducts('mens')" class="filter-btn bg-white border px-4 py-2 rounded-full">Men's Clothing</button>
-      <button onclick="filterProducts('women')" class="filter-btn bg-white border px-4 py-2 rounded-full">Women's Clothing</button>
-    </div>
+<!-- ================= HOME SECTION ================= -->
+<div id="homeSection">
 
-    <!-- Product Grid -->
-    <div id="productContainer" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <!-- HERO -->
+  <section class="bg-indigo-600 text-white text-center py-20">
+    <h2 class="text-4xl font-bold mb-4">Best Collection For You</h2>
+    <p class="mb-6">Discover amazing products at the best price</p>
+    <button onclick="showProducts(document.querySelectorAll('.nav-link')[1])"
+      class="bg-white text-indigo-600 px-6 py-2 rounded-full font-semibold cursor-pointer hover:scale-105 transition">
+      Shop Now
+    </button>
+  </section>
+
+
+  <!-- WHY CHOOSE US -->
+  <section class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Why Choose Us</h2>
+      <p class="text-gray-600 mb-12">
+        We provide the best shopping experience with top-notch services.
+      </p>
+
+      <div class="grid md:grid-cols-4 gap-6">
+
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <i class="fa-solid fa-truck-fast text-indigo-600 text-2xl mb-4"></i>
+          <h4 class="font-semibold mb-2">Fast Delivery</h4>
+          <p class="text-sm text-gray-500">
+            Get your orders delivered quickly and efficiently.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <i class="fa-solid fa-headset text-indigo-600 text-2xl mb-4"></i>
+          <h4 class="font-semibold mb-2">24/7 Support</h4>
+          <p class="text-sm text-gray-500">
+            Our support team is available around the clock.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <i class="fa-solid fa-shield-halved text-indigo-600 text-2xl mb-4"></i>
+          <h4 class="font-semibold mb-2">Secure Payment</h4>
+          <p class="text-sm text-gray-500">
+            Experience safe and secure transactions.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <i class="fa-solid fa-rotate-left text-indigo-600 text-2xl mb-4"></i>
+          <h4 class="font-semibold mb-2">Easy Returns</h4>
+          <p class="text-sm text-gray-500">
+            Return products easily within 30 days.
+          </p>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-300 py-10 mt-10">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-      <div>
-        <h3 class="text-xl font-bold text-white mb-3">SwiftCart</h3>
-        <p>Your one-stop shop for fashion and electronics.</p>
+
+  <!-- TRENDING -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-8">Trending Now</h2>
+
+      <div id="trendingContainer"
+        class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
       </div>
-      <div>
-        <h4 class="font-semibold text-white mb-3">Quick Links</h4>
-        <ul class="space-y-2">
-          <li>Home</li>
-          <li>Products</li>
-          <li>Contact</li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold text-white mb-3">Subscribe</h4>
-        <input type="email" placeholder="Enter email"
-          class="px-3 py-2 rounded text-black w-full mb-2">
-        <button class="bg-indigo-600 px-4 py-2 rounded w-full">
+    </div>
+  </section>
+
+</div>
+
+
+<!-- ================= PRODUCTS SECTION ================= -->
+<div id="productsSection" class="hidden">
+
+<section class="max-w-7xl mx-auto px-6 py-10">
+
+  <h2 class="text-3xl font-bold text-center mb-6">Our Products</h2>
+
+  <div id="categoryContainer"
+    class="flex justify-center gap-4 mb-8 flex-wrap"></div>
+
+  <div id="loader"
+    class="text-center hidden text-indigo-600 font-semibold mb-4">
+    Loading Products...
+  </div>
+
+  <div id="productContainer"
+    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
+</section>
+
+</div>
+
+
+<!-- ================= CART MODAL ================= -->
+<div id="cartModal"
+  class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg w-96 max-h-[80vh] overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+    <div id="cartItems"></div>
+    <h3 class="font-semibold mt-4">Total: $<span id="totalPrice">0</span></h3>
+    <button onclick="closeCart()"
+      class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded w-full hover:bg-indigo-700 transition">
+      Close
+    </button>
+  </div>
+</div>
+
+
+<!-- ================= DETAILS MODAL ================= -->
+<div id="detailsModal"
+  class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg w-[500px] max-h-[80vh] overflow-y-auto">
+    <h2 id="modalTitle" class="font-bold text-lg mb-2"></h2>
+    <img id="modalImage" class="h-40 mx-auto mb-3">
+    <p id="modalDescription" class="text-sm mb-2"></p>
+    <p class="font-bold text-indigo-600 mb-2">$<span id="modalPrice"></span></p>
+    <p class="mb-4">Rating: ⭐ <span id="modalRating"></span></p>
+    <button onclick="closeDetails()"
+      class="bg-indigo-600 text-white px-4 py-2 rounded w-full hover:bg-indigo-700 transition">
+      Close
+    </button>
+  </div>
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+ <footer class="bg-[#1e293b] text-gray-300 pt-12 pb-6 mt-10">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+
+    <!-- Column 1 -->
+    <div>
+      <h3 class="text-xl font-bold text-indigo-400 mb-3">SwiftCart</h3>
+      <p class="text-sm leading-relaxed">
+        Your one-stop shop for all your fashion and lifestyle needs.
+        Quality products, fast delivery, and excellent support.
+      </p>
+    </div>
+
+    <!-- Column 2 -->
+    <div>
+      <h4 class="text-white font-semibold mb-4">QUICK LINKS</h4>
+      <ul class="space-y-2 text-sm">
+        <li class="cursor-pointer hover:text-white">Home</li>
+        <li class="cursor-pointer hover:text-white">Products</li>
+        <li class="cursor-pointer hover:text-white">About</li>
+        <li class="cursor-pointer hover:text-white">Contact</li>
+      </ul>
+    </div>
+
+    <!-- Column 3 -->
+    <div>
+      <h4 class="text-white font-semibold mb-4">SUPPORT</h4>
+      <ul class="space-y-2 text-sm">
+        <li class="cursor-pointer hover:text-white">FAQ</li>
+        <li class="cursor-pointer hover:text-white">Shipping</li>
+        <li class="cursor-pointer hover:text-white">Returns</li>
+        <li class="cursor-pointer hover:text-white">Privacy Policy</li>
+      </ul>
+    </div>
+
+    <!-- Column 4 -->
+    <div>
+      <h4 class="text-white font-semibold mb-4">
+        SUBSCRIBE TO OUR NEWSLETTER
+      </h4>
+
+      <p class="text-sm mb-3">
+        The latest news, articles, and resources,
+        sent to your inbox weekly.
+      </p>
+
+      <div class="flex">
+        <input type="email"
+          placeholder="Enter your email"
+          class="px-3 py-2 rounded-l bg-gray-200 text-black w-full text-sm focus:outline-none">
+
+        <button
+          class="bg-indigo-500 px-4 py-2 rounded-r text-white text-sm cursor-pointer hover:bg-indigo-600 transition">
           Subscribe
         </button>
       </div>
     </div>
-    <p class="text-center mt-8 text-sm text-gray-500">© 2026 SwiftCart</p>
-  </footer>
+
+  </div>
+
+  <!-- Divider -->
+  <div class="border-t border-gray-600 mt-10 pt-6">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm">
+
+      <p class="text-gray-400">
+        © 2025 SwiftCart, Inc. All rights reserved.
+      </p>
+
+      <!-- Social Icons -->
+      <div class="flex gap-5 mt-4 md:mt-0 text-gray-400 text-lg">
+        <i class="fa-brands fa-facebook cursor-pointer hover:text-white transition"></i>
+        <i class="fa-brands fa-twitter cursor-pointer hover:text-white transition"></i>
+        <i class="fa-brands fa-instagram cursor-pointer hover:text-white transition"></i>
+        <i class="fa-brands fa-linkedin cursor-pointer hover:text-white transition"></i>
+        <i class="fa-regular fa-envelope cursor-pointer hover:text-white transition"></i>
+      </div>
+
+    </div>
+  </div>
+
+</footer>
+
 
 <script>
-const products = [
 
-  // Men's Clothing
-  { id:1, title:"Fjallraven Backpack", price:109.95, category:"mens", image:"./assets/Men's fassion-01.png" },
-  { id:2, title:"Mens Casual T-Shirt", price:22.3, category:"mens", image:"./assets/Men's fassion02.png" },
-  { id:3, title:"Mens Cotton Jacket", price:55.99, category:"mens", image:"./assets/Men's  fassion03.png" },
-  { id:4, title:"Mens Slim Fit Shirt", price:15.99, category:"mens", image:"./assets/Men's fassion04.png" },
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let allProducts = [];
 
-  // Jewelry
-  { id:6, title:"Silver Bracelet", price:695, category:"jewelry", image:"./assets/Jewelery_01.png" },
-  { id:7, title:"Gold Petite Ring", price:168, category:"jewelry", image:"./assets/Jewelery_2.png" },
-  { id:8, title:"Princess Cut Ring", price:9.99, category:"jewelry", image:"./assets/Jewelery_3.png" },
-  { id:9, title:"Rose Gold Earrings", price:10.99, category:"jewelry", image:"./assets/Jewelery_4.png" },
+const productContainer = document.getElementById("productContainer");
+const categoryContainer = document.getElementById("categoryContainer");
+const loader = document.getElementById("loader");
+const cartCount = document.getElementById("cartCount");
+const homeSection = document.getElementById("homeSection");
+const productsSection = document.getElementById("productsSection");
 
-  // Electronics 
-  { id:11, title:"WD 2TB Portable HDD", price:64, category:"electronics", image:"./assets/Elecronics_1.png" },
-  { id:12, title:"SanDisk SSD 1TB", price:109, category:"electronics", image:"./assets/Electronics_2.png" },
-  { id:13, title:"Gaming Drive 4TB", price:114, category:"electronics", image:"./assets/Electronics_3.png" },
-  { id:14, title:"Acer Monitor 21 inch", price:599, category:"electronics", image:"./assets/Electronics_4.png" },
 
-  // Women's Clothing
-  { id:16, title:"Women's Rain Jacket", price:39.99, category:"women", image:"./assets/Women_Cloths_1.png" },
-  { id:17, title:"Women's Solid Shirt", price:9.85, category:"women", image:"./assets/Women_cloths_2.png" },
-  { id:18, title:"Women's Short Sleeve Tee", price:7.95, category:"women", image:"./assets/Women_cloths_3.png" },
-    { id:19, title:"Women's Graphic T-Shirt", price:12.99, category:"women", image:"./assets/Women_cloths_4.png" }]
+// NAVIGATION
+function showHome(element){
+  homeSection.classList.remove("hidden");
+  productsSection.classList.add("hidden");
+  setNavActive(element);
+}
 
-const container = document.getElementById("productContainer");
+function showProducts(element){
+  homeSection.classList.add("hidden");
+  productsSection.classList.remove("hidden");
+  setNavActive(element);
+}
 
-function displayProducts(items){
-  container.innerHTML = "";
-  items.forEach(product => {
-    container.innerHTML += `
+function setNavActive(element){
+  document.querySelectorAll(".nav-link")
+    .forEach(link => link.classList.remove("text-indigo-600"));
+  element.classList.add("text-indigo-600");
+}
+
+
+// TRENDING
+async function loadTrending(){
+  const res = await fetch("https://fakestoreapi.com/products?limit=3");
+  const data = await res.json();
+  const trendingContainer = document.getElementById("trendingContainer");
+
+  trendingContainer.innerHTML = "";
+
+  data.forEach(product => {
+    trendingContainer.innerHTML += `
       <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
-        <img src="${product.image}" class="h-48 w-full object-contain mb-4">
-        <h3 class="font-semibold text-lg mb-2">${product.title}</h3>
-        <p class="text-indigo-600 font-bold mb-3">$${product.price}</p>
-        <div class="flex justify-between">
-          <button class="border px-3 py-1 rounded text-lg flex items-center gap-2">
-            <i class="fa-regular fa-eye"></i>
-            <span>Details</span>
-            </button>          <button class="bg-indigo-600 text-white px-3 py-1 rounded text-sm flex items-center gap-2 hover:bg-indigo-700 transition">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Add</span>
-              </button>        </div>
+        <img src="${product.image}"
+          class="h-40 w-full object-contain mb-4">
+        <h3 class="font-semibold text-sm mb-2">
+          ${product.title.substring(0,40)}...
+        </h3>
+        <p class="text-indigo-600 font-bold mb-1">$${product.price}</p>
+        <div class="flex justify-between gap-2">
+          <button onclick="showDetails(${product.id})"
+            class="border px-3 py-1 rounded text-sm hover:bg-gray-100 transition">
+            Details
+          </button>
+          <button onclick="addToCart(${product.id})"
+            class="bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700 transition">
+            Add
+          </button>
+        </div>
       </div>
     `;
   });
 }
 
-function filterProducts(category){
-  if(category === "all"){
-    displayProducts(products);
-  } else {
-    const filtered = products.filter(product => product.category === category);
-    displayProducts(filtered);
+
+// LOAD PRODUCTS
+async function loadProducts(category="all"){
+  loader.classList.remove("hidden");
+  productContainer.innerHTML = "";
+
+  let url = "https://fakestoreapi.com/products";
+  if(category !== "all"){
+    url = `https://fakestoreapi.com/products/category/${category}`;
   }
+
+  const res = await fetch(url);
+  const data = await res.json();
+  allProducts = data;
+
+  displayProducts(data);
+  loader.classList.add("hidden");
 }
 
-displayProducts(products);
+function displayProducts(products){
+  productContainer.innerHTML = "";
+
+  products.forEach(product => {
+    productContainer.innerHTML += `
+      <div class="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
+        <img src="${product.image}"
+          class="h-40 w-full object-contain mb-4">
+        <h3 class="font-semibold text-sm mb-2">
+          ${product.title.substring(0,40)}...
+        </h3>
+        <p class="text-indigo-600 font-bold mb-1">$${product.price}</p>
+        <p class="text-sm mb-3">⭐ ${product.rating.rate}</p>
+        <div class="flex justify-between gap-2">
+          <button onclick="showDetails(${product.id})"
+            class="border px-3 py-1 rounded text-sm hover:bg-gray-100 transition">
+            Details
+          </button>
+          <button onclick="addToCart(${product.id})"
+            class="bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700 transition">
+            Add
+          </button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+
+// DETAILS
+async function showDetails(id){
+  const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+  const product = await res.json();
+
+  document.getElementById("modalTitle").innerText = product.title;
+  document.getElementById("modalImage").src = product.image;
+  document.getElementById("modalDescription").innerText = product.description;
+  document.getElementById("modalPrice").innerText = product.price;
+  document.getElementById("modalRating").innerText = product.rating.rate;
+
+  document.getElementById("detailsModal").classList.remove("hidden");
+}
+
+function closeDetails(){
+  document.getElementById("detailsModal").classList.add("hidden");
+}
+
+
+// CART
+function addToCart(id){
+  const product = allProducts.find(p => p.id === id) ||
+                  JSON.parse(localStorage.getItem("cart")).find(p => p.id === id);
+  cart.push(product);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCart();
+}
+
+function updateCart(){
+  cartCount.innerText = cart.length;
+}
+
+function openCart(){
+  document.getElementById("cartModal").classList.remove("hidden");
+  renderCart();
+}
+
+function closeCart(){
+  document.getElementById("cartModal").classList.add("hidden");
+}
+
+function renderCart(){
+  const cartItems = document.getElementById("cartItems");
+  cartItems.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item,index)=>{
+    total += item.price;
+
+    cartItems.innerHTML += `
+      <div class="flex justify-between mb-2">
+        <span class="text-sm">${item.title.substring(0,20)}...</span>
+        <button onclick="removeItem(${index})"
+          class="text-red-500 text-sm">X</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("totalPrice").innerText = total.toFixed(2);
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+  updateCart();
+}
+
+
+// INIT
+updateCart();
+loadProducts();
+loadTrending();
+
 </script>
 
 </body>
